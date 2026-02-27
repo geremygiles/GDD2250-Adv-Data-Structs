@@ -30,5 +30,5 @@
 *.exe
 *.out
 *.app
-TicTacToe/.vs/TicTacToe.slnx/v18/Browse.VC.opendb
-TicTacToe/.vs/TicTacToe.slnx/FileContentIndex/a8691efd-a066-4a72-850e-a82ddd344d61.vsidx
+*.opendb
+*.vsidx
