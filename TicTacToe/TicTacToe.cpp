@@ -71,6 +71,7 @@ int main()
     {
         cout << "1 or 2 players?" << endl;
         
+        // Loop until 1 or 2 is entered
         int inputtedPlayers;
         cin >> inputtedPlayers;
         if (inputtedPlayers == 1 || inputtedPlayers == 2) // Valid Input
@@ -80,7 +81,10 @@ int main()
         else
         {
             cout << "Invalid Input, please try again." << endl;
-            inputtedPlayers = 0;
+
+            // Clear the console if the user has inputted an invalid character
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
     }
 
