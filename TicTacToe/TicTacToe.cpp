@@ -19,6 +19,8 @@ private:
         {' ',' ',' '}
     };
 
+    bool player1Win;
+
     bool SinglePlayerGame()
     {
         cout << "Single player game" << endl;
@@ -30,20 +32,17 @@ private:
             // Game loop
 
             PlayerTurn(1);
-            
-            ShowBoard();
-
-            //ComputerTurn();
-
-            PlayerTurn(1);
 
             ShowBoard();
 
-            PlayerTurn(1);
+            gameOver = CheckWin();
 
-            ShowBoard();
+            // ComputerTurn();
 
-            gameOver = true;
+            // ShowBoard();
+
+            // gameOver = CheckWin();
+
         }
 
         return true;
@@ -63,6 +62,8 @@ private:
 
             gameOver = CheckWin();
 
+            if (gameOver) return player1Win;
+
             PlayerTurn(2);
 
             ShowBoard();
@@ -70,7 +71,7 @@ private:
             gameOver = CheckWin();
         }
 
-        return false;
+        return player1Win;
     }
 
     void ShowBoard()
@@ -88,6 +89,7 @@ private:
         int choice = 0;
         while (choice == 0)
         {
+            cout << "Player " << player << ": ";
             cout << "Please enter the number corresponding to the spot where you would like to put your marker." << endl;
             cout << "1|2|3\n4|5|6\n7|8|9" << endl;
 
@@ -102,7 +104,7 @@ private:
                 if (board[rowIndex][columnIndex] == ' ')
                 {
                     choice = inputtedChoice;
-                    board[rowIndex][columnIndex] = player = 1 ? 'O' : 'X';
+                    board[rowIndex][columnIndex] = player == 1 ? 'O' : 'X';
                 }
                 else
                 {
@@ -123,28 +125,63 @@ private:
     bool CheckWin()
     {
         // Row 1
-        if (board[0][0] == board[0][1] && board[0][0] == board[0][2]) return true;
+        if (board[0][0] != ' ' && board[0][0] == board[0][1] && board[0][0] == board[0][2])
+        {
+            player1Win = board[0][0] == 'O' ? true : false;
+            return true;
+        }
 
         // Row 2 
-        if (board[1][0] == board[1][1] && board[1][0] == board[1][2]) return true;
+        else if (board[1][0] != ' ' && board[1][0] == board[1][1] && board[1][0] == board[1][2])
+        {
+            player1Win = board[1][0] == 'O' ? true : false;
+            return true;
+        }
+            
 
         // Row 3
-        if (board[2][0] == board[2][1] && board[2][0] == board[2][2]) return true;
+        else if (board[2][0] != ' ' && board[2][0] == board[2][1] && board[2][0] == board[2][2])
+        {
+            player1Win = board[2][0] == 'O' ? true : false;
+            return true;
+        }
 
         // Col 1
-        if (board[0][0] == board[1][0] && board[0][0] == board[2][0]) return true;
+        else if (board[0][0] != ' ' && board[0][0] == board[1][0] && board[0][0] == board[2][0])
+        {
+            player1Win = board[0][0] == 'O' ? true : false;
+            return true;
+        }
 
         // Col 2
-        if (board[0][1] == board[1][1] && board[0][1] == board[2][1]) return true;
+        else if (board[0][1] != ' ' && board[0][1] == board[1][1] && board[0][1] == board[2][1])
+        {
+            player1Win = board[0][1] == 'O' ? true : false;
+            return true;
+        }
 
         // Col 3
-        if (board[0][2] == board[1][2] && board[0][2] == board[2][2]) return true;
+        else if (board[0][2] != ' ' && board[0][2] == board[1][2] && board[0][2] == board[2][2])
+        {
+            player1Win = board[0][2] == 'O' ? true : false;
+            return true;
+        }
 
         // Diag 1
-        if (board[0][0] == board[1][1] && board[0][0] == board[2][2]) return true;
+        else if (board[0][0] != ' ' && board[0][0] == board[1][1] && board[0][0] == board[2][2])
+        {
+            player1Win = board[0][0] == 'O' ? true : false;
+            return true;
+        }
 
         // Diag 2
-        if (board[2][0] == board[1][1] && board[2][0] == board[0][2]) return true;
+        else if (board[2][0] != ' ' && board[2][0] == board[1][1] && board[2][0] == board[0][2])
+        {
+            player1Win = board[2][0] == 'O' ? true : false;
+            return true;
+        }
+
+        else return false;
     }
 
 public:
