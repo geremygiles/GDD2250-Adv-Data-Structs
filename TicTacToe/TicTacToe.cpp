@@ -12,6 +12,27 @@ using namespace std;
 // Class declarations
 class Game
 {
+public:
+
+    /// <summary>
+    /// The method to start the correct game loop, depending on the amount of players.
+    /// </summary>
+    /// <param name="playerCount">The amount of players in this game.</param>
+    /// <returns>Whether player 1 won or not.</returns>
+    bool StartGame(int playerCount)
+    {
+        if (playerCount == 1)
+        {
+            return SinglePlayerGame();
+        }
+        else
+        {
+            return TwoPlayerGame();
+        }
+    }
+
+    bool GameTie = false;
+
 private:
 
     // The board that is referenced throughout the game
@@ -244,30 +265,29 @@ private:
             return true;
         }
 
+
         // No win conditions found
-        else return false;
-    }
-
-public:
-
-    /// <summary>
-    /// The method to start the correct game loop, depending on the amount of players.
-    /// </summary>
-    /// <param name="playerCount">The amount of players in this game.</param>
-    /// <returns>Whether player 1 won or not.</returns>
-    bool StartGame(int playerCount)
-    {
-        if (playerCount == 1)
-        {
-            return SinglePlayerGame();
-        }
         else
         {
-            return TwoPlayerGame();
+            // Check for tie
+            bool spotRemaining = false; // Tracks if there is an empty spot remaining
+            for (int i = 0; i < 3; i++) // Interate the rows
+            {
+                for (int j = 0; j < 3; j++) // Iterate the columns
+                {
+                    if (board[i][j] == ' ') spotRemaining = true; // There is a possible move left
+                }
+            }
+            if (!spotRemaining) // No possible spots left, but also no win
+            {
+                GameTie = true;
+                return true;
+            }
+            else return false; // No win or tie detected, continue normal play
         }
     }
 
-    bool GameTie = false;
+
 };
 
 
