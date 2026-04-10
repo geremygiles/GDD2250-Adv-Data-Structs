@@ -1,0 +1,45 @@
+Chapter Exercises Plan
+
+Chapter 2:
+ - Show size of data types
+ - Simple Arithmetic
+
+Chapter 3: 
+ - User Input Manipulation (Input/Output)
+ - Text Append: Reading/Writing to a file (File Input/Output)
+
+Chapter 4: 
+ - String Comparisons
+ - Checking Input Stream / Input Validation
+
+Chapter 5:
+ - ASCII Art (While Loops)
+ - File Analytics (Lines, chars, spaces, EOF LCV)
+
+Chapter 6: 
+ - Squaring (Value vs Reference Parameter)
+ - Counting Total calls in a user defined loop (Static Vars)
+
+Chapter 7:
+ - State Machine (Enums)
+ - Text Reverser (Strings)
+
+Chapter 8: 
+ - Number Sorter (Array/Sorting)
+ - Text Preview (C-Strings)
+
+Chapter 9:
+ - Discounted Restaurant Bill (Using Const to adjust prices without changing orig) 
+ - Friend Database (Array of Structs)
+
+Chapter 10: 
+ - Hacker Simulator (Insider/Elsewhere)
+ - Bank Account (Privates vs Publics)
+
+Chapter 11:
+ - Inventory System (Inheritance/Composition)
+ - Security Team (Public, Private, Protected)
+
+Chapter 12: 
+ - Memory Master (Pointers, copying)
+ - My List 
