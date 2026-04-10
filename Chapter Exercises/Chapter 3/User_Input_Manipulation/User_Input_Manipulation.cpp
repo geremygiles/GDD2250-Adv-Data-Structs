@@ -40,7 +40,7 @@ int main()
 
     cout << "Input something interesting!" << endl << endl;
     
-
+    // Alternating Caps flag
     bool caps = false;
 
     // Add spaces in-between characters
@@ -49,11 +49,9 @@ int main()
     {
         cin.get(inputChar);
 
-        cout << inputChar << endl;
-
         if (inputChar > 96 && inputChar < 123) // If lowercase
         {
-            if (caps) // Alternating Caps flag
+            if (caps)
             {
                 inputChar -= 32;
             }
