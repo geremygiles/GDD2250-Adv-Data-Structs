@@ -18,18 +18,59 @@ int main()
     ofstream fileOutput;
 
     string textString;
+    string tempString;
 
     // Check if file already exists
     if (std::filesystem::exists("\MyFile.txt"))
     {
         // Open the file
         fileInput.open("\MyFile.txt");
+        cout << "File opened successfully!" << endl;
 
-        cout << "File opened" << endl;
+        // Print the contents
+        cout << "File Contents:" << endl << endl;
 
-        fileInput >> textString;
+        
+        while (fileInput.peek() != EOF) // Read to end of file
+        {
+            tempString = fileInput.get(); // Get all chars, including whitespace and new lines
 
-        cout << textString;
+            textString = textString + tempString; // Write the files to a string
+        }
+
+        cout << textString << endl << endl; // Show file contents
+
+
+        // Prompt user for input
+        cout << "Write what would you would like to append to the file, then press enter." << endl << endl;
+        getline(cin, tempString);
+
+        tempString = '\n' + tempString; // Add a new line before input.
+
+        textString = textString + tempString; // Add input to text string
+
+
+        // Show appended contents
+        cout << endl << "New Contents: " << endl << endl << textString << endl << endl;
+
+        // Prompt for Confirm
+        cout << "Do you want to save? y/n" << endl;
+        tempString = cin.get();
+
+        if (tempString == "y")
+        {
+            fileOutput.open("\MyFile.txt");
+            fileOutput << textString;
+            cout << "Saved! Closing File...";
+        }
+        else if (tempString == "n")
+        {
+            cout << "Cancelling and closing file...";
+        }
+        else
+        {
+            cout << "Invalid input. Closing file.";
+        }
 
         fileInput.close();
     }
@@ -38,7 +79,31 @@ int main()
         cout << "No file found, creating new file" << endl;
         fileOutput.open("\MyFile.txt");
 
-        fileOutput << "Created new file";
+        // Prompt user for input
+        cout << "Write what would you would like to append to the file, then press enter." << endl << endl;
+        getline(cin, textString);
+
+        // Show appended contents
+        cout << endl << "New Contents: " << endl << endl << textString << endl << endl;
+
+
+        // Prompt for Confirm
+        cout << "Do you want to save? y/n" << endl;
+        tempString = cin.get();
+
+        if (tempString == "Y")
+        {
+            fileOutput << textString;
+            cout << "Saved! Closing File...";
+        }
+        else if (tempString == "N")
+        {
+            cout << "Cancelling and closing file...";
+        }
+        else
+        {
+            cout << "Invalid input. Closing file.";
+        }
 
         fileOutput.close();
     }
@@ -47,13 +112,11 @@ int main()
     
 
 
-    // Print the contents
+    
 
-    // Prompt user for input
+    
 
-    // Show appended contents
-
-    // Confirm
+    
 
     // Close the file
 }
