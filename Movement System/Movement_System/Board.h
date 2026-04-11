@@ -1,12 +1,11 @@
 #pragma once
+/// <summary>
 /// The game board, with all the data about the player's position and the bounds of their movement.
+/// </summary>
 class Board
 {
 	public:
 		// Moves the player in the specified direction.
-		// yDelta: The movement down on the vertical axis.
-		// xDelta: The movement right on the horizontal axis.
-		// Returns a bool indicating whether the move was successful or not.
 		bool Move(int yDelta, int xDelta); 
 
 		// Prints the board to the console.
