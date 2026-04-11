@@ -16,28 +16,37 @@ void InitializeBoard();
 int main()
 {
     // Constants
-    const int STARTING_X_COORD = 0;
+    // The location the player starts the game at
+    const int STARTING_X_COORD = 0; 
     const int STARTING_Y_COORD = 0;
+
+    // The max size of the board
     const int MAX_X = 4;
     const int MAX_Y = 4;
 
     // Declaring variables
-    bool quit = false;
-    bool validInput = false;
-    string input;
-    char direction;
+    bool quit = false; // Tracks if the player wants to quit
+    bool validInput = false; // Tracks if the player has entered a valid input
+    string input; // Input stream reads into this var
+    char direction; // The first character the user inputs, used to find their intended movement direction
+
+    // Inform the user of the rules
+    cout << "Welcome to 2D Movement: The Game!\n - Input your desired direction with wasd, and press enter to confirm." << endl
+        << " - If you cannot complete your selected move, or if your input is invalid, you will be reprompted." << endl
+        << " - Enter EXIT at any time to end the program." << endl << endl;
 
     // Initialize Board, set player initial position
     Board board(MAX_Y, MAX_X, STARTING_Y_COORD, STARTING_X_COORD);
 
-    board.PrintBoard();
-
     // Game Loop
     while (!quit)
     {
-        // Loop to get a number from the user
+        // Loop to get a valid direction from the user
         while (!validInput)
         {
+            // Show current board
+            board.PrintBoard();
+
             // Prompt the user to choose a direction to move
             cout << "Choose a movement direction (w - North, a - West, s - South, d - East)" << endl;
             cin >> input;
@@ -58,44 +67,40 @@ int main()
                 validInput = false; // Set flag to false to loop
                 continue;
             }
-            else validInput = true;
 
             // Get the first character of the input to find direction
             direction = input[0];
 
-            // Identify desired direction or re-loop
+            // Identify desired direction or re-loop if invalid
             switch (direction)
             {
                 case 'w': // North movement, up one unit
                     validInput = board.Move(-1, 0);
+                    if (!validInput) cout << "You cannot move north right now. Try again!" << endl;
                     break;
                 case 'a': // West movement, left one unit
                     validInput = board.Move(0, -1);
+                    if (!validInput) cout << "You cannot move west right now. Try again!" << endl;
                     break;
                 case 's': // South movement, down one unit
                     validInput = board.Move(1, 0);
+                    if (!validInput) cout << "You cannot move south right now. Try again!" << endl;
                     break;
                 case 'd': // East movement, right one unit
                     validInput = board.Move(0, 1);
+                    if (!validInput) cout << "You cannot move east right now. Try again!" << endl;
                     break;
                 default:
-                    direction = '\0';
-                    input = "";
+                    cout << "Invalid input. Try again!" << endl;
                     validInput = false;
             }
         }
 
-        // Print Board
-        board.PrintBoard();
+        // Reloop for next input
         validInput = false;
-        
-
-        
 
         
     }
 
-
-    
-    //cout << "___________" << endl;
+    return 0; // End program
 }
