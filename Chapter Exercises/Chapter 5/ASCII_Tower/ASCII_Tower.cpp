@@ -57,7 +57,7 @@ int main()
         cin >> towerWidth;
 
         // Clear input stream if needed
-        if (!cin || cin.peek() != '\n') // Check for fail state
+        if (!cin || cin.peek() != '\n' || towerWidth < 1) // Check for fail state
         {
             cin.clear(); // Clear fail state
             cin.ignore(1000, '\n'); // Ignore any other input
@@ -78,7 +78,7 @@ int main()
         cin >> charCount;
 
         // Clear input stream if needed
-        if (!cin || cin.peek() != '\n') // Check for fail state
+        if (!cin || cin.peek() != '\n' || charCount < 1) // Check for fail state
         {
             cin.clear(); // Clear fail state
             cin.ignore(1000, '\n'); // Ignore any other input
