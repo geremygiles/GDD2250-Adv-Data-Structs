@@ -91,12 +91,12 @@ int main()
         cout << "Do you want to save? y/n" << endl;
         tempString = cin.get();
 
-        if (tempString == "Y")
+        if (tempString == "y")
         {
             fileOutput << textString;
             cout << "Saved! Closing File...";
         }
-        else if (tempString == "N")
+        else if (tempString == "n")
         {
             cout << "Cancelling and closing file...";
         }
