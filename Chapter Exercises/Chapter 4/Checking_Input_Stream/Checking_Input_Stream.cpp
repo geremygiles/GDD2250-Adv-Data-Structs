@@ -29,7 +29,7 @@ int main()
             // Prompt user for number
             cout << "Enter any integer: " << endl;
 
-            // Clear input stream if needed
+            // Quit if needed
             if (cin.peek() == 'q')
             {
                 cout << "Qutting..." << endl;
@@ -41,7 +41,7 @@ int main()
             // Try to write to an int
             cin >> activeNumber;
 
-            
+            // Clear input stream if needed
             if (!cin || cin.peek() != '\n') // Check for fail state
             {
                 cin.clear(); // Clear fail flag
