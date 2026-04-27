@@ -33,35 +33,36 @@ string BinarySearchTree::AddNode(int nodeData)
 			if (newNode->GetData() < currentNode->GetData())
 			{
 				// Check if there is a value in the left node
-				if (currentNode->GetLeftNode() != nullptr)
-				{
-					// Check if the new node falls between the current node and the left node
-					if (currentNode->GetLeftNode()->GetData() < newNode->GetData())
-					{
-						// Check if the branch has a right side, and if so, if the branch should entirely shift left, or if it should be split with the new value
-						if (currentNode->GetLeftNode()->GetRightNode() != nullptr && currentNode->GetLeftNode()->GetRightNode()->GetData() > newNode->GetData())
-						{
-							// Split the branch in half, with the left half (including the center) becoming the new node's left, and the right becoming the new right node.
-							newNode->SetLeftNode(currentNode->GetLeftNode());
-							newNode->SetRightNode(currentNode->GetLeftNode()->GetRightNode());
+				if (currentNode->GetLeftNode() != nullptr) currentNode = currentNode->GetLeftNode();
+				//{
+				
+					//// Check if the new node falls between the current node and the left node
+					//if (currentNode->GetLeftNode()->GetData() < newNode->GetData())
+					//{
+					//	// Check if the branch has a right side, and if so, if the branch should entirely shift left, or if it should be split with the new value
+					//	if (currentNode->GetLeftNode()->GetRightNode() != nullptr && currentNode->GetLeftNode()->GetRightNode()->GetData() > newNode->GetData())
+					//	{
+					//		// Split the branch in half, with the left half (including the center) becoming the new node's left, and the right becoming the new right node.
+					//		newNode->SetLeftNode(currentNode->GetLeftNode());
+					//		newNode->SetRightNode(currentNode->GetLeftNode()->GetRightNode());
 
-							currentNode->SetLeftNode(newNode);
+					//		currentNode->SetLeftNode(newNode);
 
-							break;
-						}
-						else
-						{
-							// Shift the entire branch left
-							newNode->SetLeftNode(currentNode->GetLeftNode());
-							currentNode->SetLeftNode(newNode);
+					//		break;
+					//	}
+					//	else
+					//	{
+					//		// Shift the entire branch left
+					//		newNode->SetLeftNode(currentNode->GetLeftNode());
+					//		currentNode->SetLeftNode(newNode);
 
-							break;
-						}
-					}
+					//		break;
+					//	}
+					//}
 
-					// New node is less than left side, move to the left node
-					else currentNode = currentNode->GetLeftNode();
-				}
+					//// New node is less than left side, move to the left node
+					//else currentNode = currentNode->GetLeftNode();
+				//}
 				
 				// If there is no value in the left node, set the left node to this new node
 				else
@@ -81,36 +82,37 @@ string BinarySearchTree::AddNode(int nodeData)
 			// If the new node's value is greater than the current node, move to the right side of the current node
 			else
 			{
-				// Check if there is a value in the right node
-				if (currentNode->GetRightNode() != nullptr)
-				{
-					// Check if the new node falls between the current node and the right node
-					if (currentNode->GetRightNode()->GetData() > newNode->GetData())
-					{
-						// Check if the branch has a left side, and if so, if the branch should entirely shift right, or if it should be split with the new value
-						if (currentNode->GetRightNode()->GetLeftNode() != nullptr && currentNode->GetRightNode()->GetLeftNode()->GetData() < newNode->GetData())
-						{
-							// Split the branch in half, with the right half (including the center) becoming the new node's right, and the left becoming the new left node.
-							newNode->SetRightNode(currentNode->GetRightNode());
-							newNode->SetLeftNode(currentNode->GetRightNode()->GetLeftNode());
+				// Check if there is a value in the right node, if there is, move to that one
+				if (currentNode->GetRightNode() != nullptr) currentNode = currentNode->GetRightNode();
+				//{
 
-							currentNode->SetRightNode(newNode);
+					//// Check if the new node falls between the current node and the right node
+					//if (currentNode->GetRightNode()->GetData() > newNode->GetData())
+					//{
+					//	// Check if the branch has a left side, and if so, if the branch should entirely shift right, or if it should be split with the new value
+					//	if (currentNode->GetRightNode()->GetLeftNode() != nullptr && currentNode->GetRightNode()->GetLeftNode()->GetData() < newNode->GetData())
+					//	{
+					//		// Split the branch in half, with the right half (including the center) becoming the new node's right, and the left becoming the new left node.
+					//		newNode->SetRightNode(currentNode->GetRightNode());
+					//		newNode->SetLeftNode(currentNode->GetRightNode()->GetLeftNode());
 
-							break;
-						}
-						else
-						{
-							// Shift the entire branch right
-							newNode->SetRightNode(currentNode->GetRightNode());
-							currentNode->SetRightNode(newNode);
-							
-							break;
-						}
-					}
+					//		currentNode->SetRightNode(newNode);
 
-					// New node is greater than right side, move to the right node
-					else currentNode = currentNode->GetRightNode();
-				}
+					//		break;
+					//	}
+					//	else
+					//	{
+					//		// Shift the entire branch right
+					//		newNode->SetRightNode(currentNode->GetRightNode());
+					//		currentNode->SetRightNode(newNode);
+					//		
+					//		break;
+					//	}
+					//}
+
+					//// New node is greater than right side, move to the right node
+					//else currentNode = currentNode->GetRightNode();
+				//}
 
 				// If there is no value in the right node, set the right node to this new node
 				else
