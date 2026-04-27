@@ -1,17 +1,17 @@
 #include "Node.h"
 using namespace std;
 
-int Node::GetData()
+int Node::GetData() const
 {
 	return data;
 }
 
-Node* Node::GetLeftNode()
+Node* Node::GetLeftNode() const
 {
 	return leftNode;
 }
 
-Node* Node::GetRightNode()
+Node* Node::GetRightNode() const
 {
 	return rightNode;
 }
@@ -25,3 +25,11 @@ void Node::SetRightNode(Node* node)
 {
 	rightNode = node;
 }
+
+Node::Node(int nodeData)
+{
+	Node:data = nodeData;
+}
+
+Node::Node()
+{}

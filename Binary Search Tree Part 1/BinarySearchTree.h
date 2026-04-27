@@ -4,6 +4,8 @@
 #include "Node.h"
 #include <string>
 
+using namespace std;
+
 class BinarySearchTree
 {
 private:
@@ -18,7 +20,7 @@ public:
 	/// <returns>Returns the results of the add.</returns>
 	string AddNode(int nodeData);
 	string RemoveNode(Node node);
-	string PrintTree();
-	bool SearchTree(int nodeValue);
+	string PrintTree() const;
+	bool SearchTree(int nodeValue) const;
 };
 

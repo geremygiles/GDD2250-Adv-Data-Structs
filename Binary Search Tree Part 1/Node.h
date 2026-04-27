@@ -9,9 +9,9 @@ private:
 	Node* leftNode = nullptr;
 	Node* rightNode = nullptr;
 public:
-	int GetData();
-	Node* GetLeftNode();
-	Node* GetRightNode();
+	int GetData() const;
+	Node* GetLeftNode() const;
+	Node* GetRightNode() const;
 	void SetLeftNode(Node* node);
 	void SetRightNode(Node* node);
 	Node(int nodeData);

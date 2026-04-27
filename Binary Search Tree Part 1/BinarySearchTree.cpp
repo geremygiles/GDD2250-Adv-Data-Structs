@@ -7,6 +7,7 @@ using namespace std;
 Node* BinarySearchTree::GetRoot()
 {
 	// Return the root of the tree
+	return nullptr;
 }
 
 string BinarySearchTree::AddNode(int nodeData)
@@ -15,15 +16,15 @@ string BinarySearchTree::AddNode(int nodeData)
 	Node* newNode = new Node(nodeData);
 
 	// Add the newNode to the correct part of the tree
-	if (root == nullptr)
+	if (BinarySearchTree::root == nullptr)
 	{
-		root = newNode;
+		BinarySearchTree::root = newNode;
 		return "Successfully added node '" + to_string(nodeData) + "' to the tree as the root.";
 	}
 
 	else
 	{
-		Node* currentNode = root; // Track the current node
+		Node* currentNode = BinarySearchTree::root; // Track the current node
 		
 		// Iterate through the tree until the correct place is found
 		bool placeFound = false;
@@ -38,15 +39,15 @@ string BinarySearchTree::AddNode(int nodeData)
 				// If there is no value in the left node, set the left node to this new node
 				else
 				{
-					placeFound == true;
+					placeFound = true;
 					currentNode->SetLeftNode(newNode);
 				}
 			}
 
 			// If the contents are the same, return an error string. (No duplicates allowed)
-			else if (newNode->GetData() == root->GetData())
+			else if (newNode->GetData() == currentNode->GetData())
 			{
-				return "Failed to add node with data '" + to_string(nodeData) + "'.";
+				return "Failed to add node with data '" + to_string(nodeData) + "'. Duplicate found at node " + to_string(currentNode->GetData());
 			}
 
 			// If greater, move to the current node's right node
@@ -58,7 +59,7 @@ string BinarySearchTree::AddNode(int nodeData)
 				// If there is no value in the left node, set the left node to this new node
 				else
 				{
-					placeFound == true;
+					placeFound = true;
 					currentNode->SetRightNode(newNode);
 				}
 			}
@@ -70,14 +71,17 @@ string BinarySearchTree::AddNode(int nodeData)
 string BinarySearchTree::RemoveNode(Node node)
 {
 	// Remove the node from the tree
+	return "Remove Node";
 }
 
-string BinarySearchTree::PrintTree()
+string BinarySearchTree::PrintTree() const
 {
 	// Print the contents of the tree in order
+	return "Here's da tree";
 }
 
-bool BinarySearchTree::SearchTree(int nodeValue)
+bool BinarySearchTree::SearchTree(int nodeValue) const
 {
 	// Search the tree for a value, and return true if found
+	return true;
 }
