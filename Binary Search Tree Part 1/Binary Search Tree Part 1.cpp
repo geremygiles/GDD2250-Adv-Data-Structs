@@ -5,10 +5,24 @@
 */
 
 #include <iostream>
+#include "BinarySearchTree.h"
+#include "Node.h"
 
 using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    // Create the BST
+    BinarySearchTree bst;
+
+    // Add a node, printing the results
+    cout << bst.AddNode(3) << endl;
+
+    // Add two new nodes
+    cout << bst.AddNode(1) << endl;
+    cout << bst.AddNode(2) << endl;
+
+    // Print the tree in order
+    cout << bst.PrintTree() << endl;
+
 }

@@ -1,16 +1,24 @@
+// The binary search tree that holds the nodes. Contains a root and methods for manipulating nodes.
+
 #pragma once
-
 #include "Node.h"
-
+#include <string>
 
 class BinarySearchTree
 {
 private:
-	Node* root;
+	Node* root = nullptr;
 public:
-	void AddNode(int nodeData);
-	void RemoveNode(Node node);
-	void PrintTree();
+	Node* GetRoot();
+
+	/// <summary>
+	/// Adds the node to the tree in the correct location.
+	/// </summary>
+	/// <param name="nodeData">The data to add to the tree.</param>
+	/// <returns>Returns the results of the add.</returns>
+	string AddNode(int nodeData);
+	string RemoveNode(Node node);
+	string PrintTree();
 	bool SearchTree(int nodeValue);
 };
 
