@@ -133,8 +133,27 @@ string BinarySearchTree::RemoveNode(Node node)
 
 string BinarySearchTree::PrintTree() const
 {
-	// Print the contents of the tree in order
-	return "Here's da tree";
+	return BinarySearchTree::PrintBlock(BinarySearchTree::root);
+}
+
+string BinarySearchTree::PrintBlock(Node* root) const
+{
+	// Create string to return
+	string returnString = "";
+
+	if (root->GetLeftNode() != nullptr)
+	{
+		returnString += PrintBlock(root->GetLeftNode());
+	}
+	
+	returnString += to_string(root->GetData()) + ", ";
+
+	if (root->GetRightNode() != nullptr)
+	{
+		returnString += PrintBlock(root->GetRightNode());
+	}
+	
+	return returnString;
 }
 
 bool BinarySearchTree::SearchTree(int nodeValue) const

@@ -46,5 +46,5 @@ int main()
 
     // Print the tree in order
     cout << bst.PrintTree() << endl;
-
+    cout << bst2.PrintTree() << endl;
 }

@@ -10,6 +10,7 @@ class BinarySearchTree
 {
 private:
 	Node* root = nullptr;
+	string PrintBlock(Node* root) const;
 public:
 	Node* GetRoot();
 
