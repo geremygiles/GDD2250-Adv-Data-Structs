@@ -133,7 +133,9 @@ string BinarySearchTree::RemoveNode(Node node)
 
 string BinarySearchTree::PrintTree() const
 {
-	return BinarySearchTree::PrintBlock(BinarySearchTree::root);
+	string finalString = BinarySearchTree::PrintBlock(BinarySearchTree::root);
+	finalString = finalString.substr(0, finalString.length() - 2);
+	return finalString;
 }
 
 string BinarySearchTree::PrintBlock(Node* root) const
