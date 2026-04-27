@@ -26,21 +26,49 @@ string BinarySearchTree::AddNode(int nodeData)
 	{
 		Node* currentNode = BinarySearchTree::root; // Track the current node
 		
-		// Iterate through the tree until the correct place is found
-		bool placeFound = false;
-		while (!placeFound)
+		// Iterate through the tree until the correct place is found, then return a string
+		while (true)
 		{
-			// If the new node's value is less than the current node, move to the current node's left node
+			// If the new node's value is less than the current node, move to the left side of the current node
 			if (newNode->GetData() < currentNode->GetData())
 			{
-				// If there is a value in the left node, move to that node
-				if (currentNode->GetLeftNode() != nullptr) currentNode = currentNode->GetLeftNode();
+				// Check if there is a value in the left node
+				if (currentNode->GetLeftNode() != nullptr)
+				{
+					// Check if the new node falls between the current node and the left node
+					if (currentNode->GetLeftNode()->GetData() < newNode->GetData())
+					{
+						// Check if the branch has a right side, and if so, if the branch should entirely shift left, or if it should be split with the new value
+						if (currentNode->GetLeftNode()->GetRightNode() != nullptr && currentNode->GetLeftNode()->GetRightNode()->GetData() > newNode->GetData())
+						{
+							// Split the branch in half, with the left half (including the center) becoming the new node's left, and the right becoming the new right node.
+							newNode->SetLeftNode(currentNode->GetLeftNode());
+							newNode->SetRightNode(currentNode->GetLeftNode()->GetRightNode());
+
+							currentNode->SetLeftNode(newNode);
+
+							break;
+						}
+						else
+						{
+							// Shift the entire branch left
+							newNode->SetLeftNode(currentNode->GetLeftNode());
+							currentNode->SetLeftNode(newNode);
+
+							break;
+						}
+					}
+
+					// New node is less than left side, move to the left node
+					else currentNode = currentNode->GetLeftNode();
+				}
 				
 				// If there is no value in the left node, set the left node to this new node
 				else
 				{
-					placeFound = true;
 					currentNode->SetLeftNode(newNode);
+					
+					break;
 				}
 			}
 
@@ -50,17 +78,46 @@ string BinarySearchTree::AddNode(int nodeData)
 				return "Failed to add node with data '" + to_string(nodeData) + "'. Duplicate found at node " + to_string(currentNode->GetData());
 			}
 
-			// If greater, move to the current node's right node
+			// If the new node's value is greater than the current node, move to the right side of the current node
 			else
 			{
-				// If there is a value in the left node, move to that node
-				if (currentNode->GetRightNode() != nullptr) currentNode = currentNode->GetRightNode();
-				
-				// If there is no value in the left node, set the left node to this new node
+				// Check if there is a value in the right node
+				if (currentNode->GetRightNode() != nullptr)
+				{
+					// Check if the new node falls between the current node and the right node
+					if (currentNode->GetRightNode()->GetData() > newNode->GetData())
+					{
+						// Check if the branch has a left side, and if so, if the branch should entirely shift right, or if it should be split with the new value
+						if (currentNode->GetRightNode()->GetLeftNode() != nullptr && currentNode->GetRightNode()->GetLeftNode()->GetData() < newNode->GetData())
+						{
+							// Split the branch in half, with the right half (including the center) becoming the new node's right, and the left becoming the new left node.
+							newNode->SetRightNode(currentNode->GetRightNode());
+							newNode->SetLeftNode(currentNode->GetRightNode()->GetLeftNode());
+
+							currentNode->SetRightNode(newNode);
+
+							break;
+						}
+						else
+						{
+							// Shift the entire branch right
+							newNode->SetRightNode(currentNode->GetRightNode());
+							currentNode->SetRightNode(newNode);
+							
+							break;
+						}
+					}
+
+					// New node is greater than right side, move to the right node
+					else currentNode = currentNode->GetRightNode();
+				}
+
+				// If there is no value in the right node, set the right node to this new node
 				else
 				{
-					placeFound = true;
 					currentNode->SetRightNode(newNode);
+
+					break;
 				}
 			}
 		}
