@@ -6,7 +6,6 @@
 
 #include <iostream>
 #include "BinarySearchTree.h"
-#include "Node.h"
 
 using namespace std;
 
