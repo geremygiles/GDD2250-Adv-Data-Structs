@@ -13,15 +13,16 @@ private:
 	string PrintBlock(Node* root) const;
 public:
 	Node* GetRoot();
-
+	 
 	/// <summary>
 	/// Adds the node to the tree in the correct location.
 	/// </summary>
-	/// <param name="nodeData">The data to add to the tree.</param>
+	/// <param name="nodeValue">The data to add to the tree.</param>
 	/// <returns>Returns the results of the add.</returns>
-	string AddNode(int nodeData);
-	string RemoveNode(Node node);
+	string AddNode(int nodeValue);
+	string RemoveNode(int nodeValue);
 	string PrintTree() const;
 	bool SearchTree(int nodeValue) const;
+	Node* FindNodeParent(int nodeValue, bool& isRightNodeFlag) const;
 };
 

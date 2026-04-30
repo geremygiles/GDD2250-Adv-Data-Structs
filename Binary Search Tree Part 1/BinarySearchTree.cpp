@@ -10,16 +10,16 @@ Node* BinarySearchTree::GetRoot()
 	return nullptr;
 }
 
-string BinarySearchTree::AddNode(int nodeData)
+string BinarySearchTree::AddNode(int nodeValue)
 {
 	// Create a newNode 
-	Node* newNode = new Node(nodeData);
+	Node* newNode = new Node(nodeValue);
 
 	// Add the newNode to the correct part of the tree
 	if (BinarySearchTree::root == nullptr)
 	{
 		BinarySearchTree::root = newNode;
-		return "Successfully added node '" + to_string(nodeData) + "' to the tree as the root.";
+		return "Successfully added node '" + to_string(nodeValue) + "' to the tree as the root.";
 	}
 
 	else
@@ -76,7 +76,7 @@ string BinarySearchTree::AddNode(int nodeData)
 			// If the contents are the same, return an error string. (No duplicates allowed)
 			else if (newNode->GetData() == currentNode->GetData())
 			{
-				return "Failed to add node with data '" + to_string(nodeData) + "'. Duplicate found at node " + to_string(currentNode->GetData());
+				return "Failed to add node with data '" + to_string(nodeValue) + "'. Duplicate found at node " + to_string(currentNode->GetData());
 			}
 
 			// If the new node's value is greater than the current node, move to the right side of the current node
@@ -123,12 +123,18 @@ string BinarySearchTree::AddNode(int nodeData)
 				}
 			}
 		}
-		return "Successfully added the node '" + to_string(nodeData) + "' to the tree, under the value '" + to_string(currentNode->GetData()) + "'.";
+		return "Successfully added the node '" + to_string(nodeValue) + "' to the tree, under the value '" + to_string(currentNode->GetData()) + "'.";
 	}
 }
 
-string BinarySearchTree::RemoveNode(Node node)
+string BinarySearchTree::RemoveNode(int nodeValue)
 {
+	// Declare a flag to track direction of child
+	bool isRightNode;
+	// Find  the parent
+	Node* parentNode = FindNodeParent(nodeValue, isRightNode);
+	Node* node = isRightNode ? parentNode->GetRightNode() : parentNode->GetLeftNode();
+
 	// Remove the node from the tree
 	return "Remove Node";
 }
@@ -164,4 +170,42 @@ bool BinarySearchTree::SearchTree(int nodeValue) const
 {
 	// Search the tree for a value, and return true if found
 	return true;
+}
+
+Node* BinarySearchTree::FindNodeParent(int nodeValue, bool& isRightNodeFlag) const
+{
+	Node* currentNode = BinarySearchTree::root;
+	while (true)
+	{
+		// Desired value is lower than current node
+		if (nodeValue < currentNode->GetData())
+		{
+			if (currentNode->GetLeftNode() != nullptr)
+			{
+				// If the value is found in one of the children, break the loop at the parent
+				if (nodeValue == currentNode->GetLeftNode()->GetData())
+				{
+					isRightNodeFlag = false;
+					break;
+				}
+				currentNode = currentNode->GetLeftNode();
+			}
+		}
+
+		// Desired value is greater than current node
+		else
+		{
+			if (currentNode->GetRightNode() != nullptr)
+			{
+				// If the value is found in one of the children, break the loop at the parent
+				if (nodeValue == currentNode->GetRightNode()->GetData())
+				{
+					isRightNodeFlag = true;
+					break;
+				}
+				currentNode = currentNode->GetRightNode();
+			}
+		}
+	}
+	return currentNode;
 }
