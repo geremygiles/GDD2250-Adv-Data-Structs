@@ -51,7 +51,8 @@ int main()
 
 	// Prompt the user to enter a value to search for
     int searchValue = LoopForInput("Enter a value to search for: ", "Searching for node with value: ");
-    cout << bst.SearchTree(searchValue) << endl;
+    if (bst.SearchTree(searchValue)) cout << "Value found!" << endl;
+    else cout << "Value is not in tree" << endl;
 }
 
 

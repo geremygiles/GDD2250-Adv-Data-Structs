@@ -35,7 +35,7 @@ string BinarySearchTree::AddNode(int nodeValue)
 				// Check if there is a value in the left node
 				if (currentNode->GetLeftNode() != nullptr) currentNode = currentNode->GetLeftNode();
 				//{
-				
+					// Accidentally made a linked list haha :)
 					//// Check if the new node falls between the current node and the left node
 					//if (currentNode->GetLeftNode()->GetData() < newNode->GetData())
 					//{
@@ -85,7 +85,7 @@ string BinarySearchTree::AddNode(int nodeValue)
 				// Check if there is a value in the right node, if there is, move to that one
 				if (currentNode->GetRightNode() != nullptr) currentNode = currentNode->GetRightNode();
 				//{
-
+					// Accidentally made a linked list haha :)
 					//// Check if the new node falls between the current node and the right node
 					//if (currentNode->GetRightNode()->GetData() > newNode->GetData())
 					//{
@@ -133,10 +133,21 @@ string BinarySearchTree::RemoveNode(int nodeValue)
 	bool isRightNode;
 	// Find  the parent
 	Node* parentNode = FindNodeParent(nodeValue, isRightNode);
-	Node* node = isRightNode ? parentNode->GetRightNode() : parentNode->GetLeftNode();
+	Node* node = nullptr;
 
-	// Remove the node from the tree
-	return "Remove Node";
+	// Remove the node from the tree and clear the pointer
+	if (isRightNode)
+	{
+		delete parentNode->GetRightNode();
+		parentNode->SetRightNode(nullptr);
+	}
+	else
+	{
+		delete parentNode->GetLeftNode();
+		parentNode->SetLeftNode(nullptr);
+	}
+
+	return "Successfully removed node with the value of " + to_string(nodeValue) + " from the tree.";
 }
 
 string BinarySearchTree::PrintTree() const
@@ -168,8 +179,28 @@ string BinarySearchTree::PrintBlock(Node* root) const
 
 bool BinarySearchTree::SearchTree(int nodeValue) const
 {
+	Node* currentNode = BinarySearchTree::root;
+
 	// Search the tree for a value, and return true if found
-	return true;
+	while (true)
+	{
+		if (nodeValue < currentNode->GetData())
+		{
+			if (currentNode->GetLeftNode() != nullptr) currentNode = currentNode->GetLeftNode();
+			else return false;
+		}
+
+		else if (nodeValue == currentNode->GetData())
+		{
+			return true;
+		}
+
+		else
+		{
+			if (currentNode->GetRightNode() != nullptr) currentNode = currentNode->GetLeftNode();
+			else return false;
+		}
+	}
 }
 
 Node* BinarySearchTree::FindNodeParent(int nodeValue, bool& isRightNodeFlag) const
