@@ -5,12 +5,12 @@ using namespace std;
 
 // Public Methods
 
-void Output::PrintIntro()
+void Output::PrintIntro() const
 {
     cout << "Welcome to BlackJack!\n";
 }
 
-void Output::PrintGameStart(string playersHand, string dealersHand)
+void Output::PrintGameStart(string playersHand, string dealersHand) const
 {
     cout << "------- GAME START!! -------" << endl;
     cout << "The dealer has dealt the cards!" << endl;
@@ -18,19 +18,50 @@ void Output::PrintGameStart(string playersHand, string dealersHand)
     cout << "Dealer's card: " << dealersHand << endl << endl;
 }
 
-void Output::PrintOutro()
-{
-    cout << "Thanks for playing!" << endl;
-}
-
-void Output::PrintFlip(string dealersHand)
+void Output::PrintFlip(string dealersHand) const
 {
     cout << "The dealer flips over their hidden card. Their hand is " + dealersHand << endl;
 }
 
+void Output::PrintPlayerSummary(std::string hand, int value) const
+{
+    cout << "Your turn is over. Your final hand is: " << hand << endl;
+    cout << "Your cards add up to " << value << endl;
+}
+
+void Output::PrintDealerSummary(std::string hand, int value) const
+{
+    cout << "The dealer's turn is over. Their final hand is: " << hand << endl;
+    cout << "Their cards add up to " << value << endl;
+}
+
+void Output::PrintResults(int results) const
+{
+    switch (results)
+    {
+    case 0: // Lose
+        cout << "The dealer has won! You lost TODO." << endl;
+        break;
+    case 1: // Tie
+        cout << "You tied with the dealer! You got TODO back." << endl;
+        break;
+    case 2: // Win
+        cout << "You won! You got TODO back." << endl;
+        break;
+    default:
+        break;
+    }
+}
+
+void Output::PrintOutro() const
+{
+    cout << "Thanks for playing!" << endl;
+}
+
+
 
 // Prompting methods
-void Output::PromptRules()
+void Output::PromptRules() const
 {
     if (PromptYN("Would you like to hear the rules? y/n"))
     {
@@ -38,12 +69,12 @@ void Output::PromptRules()
     }
 }
 
-bool Output::PromptPlayAgain()
+bool Output::PromptPlayAgain() const
 {
     return PromptYN("Would you like to play again? y/n");
 }
 
-int Output::PromptDecision()
+int Output::PromptDecision() const
 {
     return PromptInt(
         "What would you like to do next?"
@@ -58,7 +89,7 @@ int Output::PromptDecision()
 
 // Private Methods
 
-bool Output::PromptYN(string prompt)
+bool Output::PromptYN(string prompt) const
 {
     char userInput;
 
@@ -80,7 +111,7 @@ bool Output::PromptYN(string prompt)
     }
 }
 
-int Output::PromptInt(string prompt, int minValue, int maxValue)
+int Output::PromptInt(string prompt, int minValue, int maxValue) const
 {
     int userInput;
 

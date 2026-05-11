@@ -26,28 +26,31 @@ void GameManager::DealCards()
 	dealersHand.front()->SetFaceUp(false);
 }
 
-std::list<Card*>* GameManager::Get
+std::list<Card*>* GameManager::GetHand(bool player)
+{
+	return player ? &playersHand : &dealersHand;
+}
 
-std::string GameManager::GetHandString(std::list<Card*> hand) const
+std::string GameManager::GetHandString(std::list<Card*>* hand) const
 {
 	std::string returnString = "";
 
-	for (const Card* card : hand)
+	for (const Card* card : *hand)
 	{
 		if (card->GetFaceUp())
 		{
 			returnString += card->GetCardString();
-			if (card != hand.back()) returnString += ", ";
+			if (card != hand->back()) returnString += ", ";
 		}
 	}
 
 	return returnString;
 }
 
-int GameManager::GetHandValue(std::list<Card*> hand) const
+int GameManager::GetHandValue(std::list<Card*>* hand) const
 {
 	int handValue = 0;
-	for (const Card* card : hand)
+	for (const Card* card : *hand)
 	{
 		handValue += card->GetValueInt();
 	}
@@ -90,6 +93,12 @@ std::string GameManager::PlayerDecision(int decisionIndex)
 	}
 }
 
+bool GameManager::CheckBust(std::list<Card*>* hand) const
+{
+	if (GetHandValue(hand) > 21) return true;
+	else return false;
+}
+
 void GameManager::FlipDealersCard()
 {
 	dealersHand.front()->SetFaceUp(true);
@@ -103,16 +112,36 @@ bool GameManager::GetShouldDealerHit() const
 std::string GameManager::DealerHit()
 {
 	dealersHand.push_back(currentDeck->Draw());
-	return "Dealer has hit. They got a " + dealersHand.back()->GetCardString();
+	CheckDealerHit(); // Check if the dealer should hit again
 
-	CheckDealerHit();
+	return "Dealer has hit. They got a " + dealersHand.back()->GetCardString();
 }
+
+int GameManager::CalculateWin()
+{
+	if (GetHandValue(&playersHand) > GetHandValue(&dealersHand)) return 2;
+	else if (GetHandValue(&playersHand) == GetHandValue(&dealersHand)) return 1;
+	else return 0;
+}
+
+bool GameManager::CheckAce(std::list<Card*>* hand) const
+{
+	for (const Card* card : *hand)
+	{
+		if (card->GetValue() == Value::Ace) return true;
+	}
+
+	return false;
+}
+
+
+
 
 // Private Methods
 
 void GameManager::CheckDealerHit()
 {
-	if (GetHandValue(dealersHand) <= 16) shouldDealerHit = true;
+	if (GetHandValue(&dealersHand) <= 16) shouldDealerHit = true;
 	else shouldDealerHit = false;
 }
 

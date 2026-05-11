@@ -11,14 +11,16 @@ public:
 	GameManager();
 	void DealCards();
 	std::list<Card*>* GetHand(bool player);
-	std::string GetHandString(std::list<Card*> hand) const;
-	int GetHandValue(std::list<Card*> hand) const;
+	std::string GetHandString(std::list<Card*>* hand) const;
+	int GetHandValue(std::list<Card*>* hand) const;
 	bool IsPlayersTurn() const;
 	std::string PlayerDecision(int);
+	bool CheckBust(std::list<Card*>* hand) const;
 	void FlipDealersCard();
 	bool GetShouldDealerHit() const;
 	std::string DealerHit();
-	
+	int CalculateWin(); // 2 = Win, 1 = Tie, 0 = Lose
+	bool CheckAce(std::list<Card*>* hand) const;
 
 private:
 	Deck* currentDeck;
