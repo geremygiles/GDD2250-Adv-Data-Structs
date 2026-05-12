@@ -6,9 +6,12 @@
 #include <iostream>
 #include <string>
 #include "Output.h"
+#include "Node.h"
 #include "Priority Queue and Heap.h"
 
 void Heapify(int* heap, int size, int index);
+void AddNode(Node* node, Node* queue[], int index);
+void PullUp(Node* heap[], int index);
 
 int main()
 {
@@ -37,6 +40,23 @@ int main()
     }
 
     out.PrintArray(heap, size);
+
+    // Priority Queue Example
+    out.PrintQueueIntro();
+
+    // Create queue
+    Node* queue[3];
+
+    // Create first node
+    AddNode(new Node("I am the first node! My priority is 3.", 3), queue, 0);
+
+    // Create second node
+    AddNode(new Node("I am the second node! My priority is 1.", 1), queue, 1);
+
+    // Create third node
+    AddNode(new Node("I am the third node! My priority is 2.", 2), queue, 2);
+
+    out.PrintQueue(queue);
 }
 
 void Heapify(int* heap, int size, int index)
@@ -67,5 +87,29 @@ void Heapify(int* heap, int size, int index)
         heap[smallestValueIndex] = temp;
 
         Heapify(heap, size, smallestValueIndex);
+    }
+}
+
+void AddNode(Node* node, Node* queue[], int index)
+{
+    queue[index] = node;
+
+    PullUp(queue, index);
+}
+
+void PullUp(Node* heap[], int index)
+{
+    if (index == 0) return;
+
+    int parentIndex = (index - 1) / 2;
+
+    if (heap[index]->GetPriority() < heap[parentIndex]->GetPriority())
+    {
+        // Swap the value at index with the value at parent
+        Node* temp = heap[index];
+        heap[index] = heap[parentIndex];
+        heap[parentIndex] = temp;
+
+        PullUp(heap, parentIndex);
     }
 }

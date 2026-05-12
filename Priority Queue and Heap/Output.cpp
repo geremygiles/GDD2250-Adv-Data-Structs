@@ -16,9 +16,9 @@ void Output::PrintHeapIntro()
 void Output::PrintQueueIntro()
 {
     cout << "Priority Queue Example" << endl << endl;
-    cout << "Enter in an array of any size, "
-        "then the program will show the unsorted array, "
-        "followed by the sorted heap." << endl;
+    cout << "Three nodes will be added to the queue with the "
+        "priority of 3, 1, and then 2. The messages in the nodes "
+        "will be printed in the correct order." << endl;
 }
 
 void Output::PrintArray(int array[], int size)
@@ -28,6 +28,14 @@ void Output::PrintArray(int array[], int size)
         cout << array[i];
         if (i < size - 1) cout << ", ";
         else cout << endl;
+    }
+}
+
+void Output::PrintQueue(Node* queue[])
+{
+    for (int i = 0; i < 3; i++)
+    {
+        cout << queue[i]->PrintMessage() << endl;
     }
 }
 
