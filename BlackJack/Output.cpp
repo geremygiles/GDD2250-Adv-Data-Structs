@@ -65,7 +65,12 @@ void Output::PromptRules() const
 {
     if (PromptYN("Would you like to hear the rules? y/n"))
     {
-        cout << "Rules: " << endl;
+        cout << "Blackjack Rules:\n"
+                "1. Aim for a hand total closer to 21 than the dealer without going over.\n"
+                "2. 2-10 = face value; J,Q,K = 10; Ace = 1.\n"
+                "3. Player options: Hit (take card), Stand (keep total).\n"
+                "4. Dealer must hit until reaching 17+.\n"
+                "5. Exceeding 21 is an automatic loss." << endl;
     }
 }
 
@@ -80,11 +85,11 @@ int Output::PromptDecision() const
         "What would you like to do next?"
         "\nPlease select from one of the following:\n"
         "\n1: Hit"
-        "\n2: Stand"
-        "\n3: Double Down"
-        "\n4: Surrender"
-        "\n5: Split",
-        1, 5);
+        "\n2: Stand",
+        //"\n3: Double Down"
+        //"\n4: Surrender"
+        //"\n5: Split",
+        1, 2);
 }
 
 // Private Methods

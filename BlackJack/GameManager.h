@@ -22,6 +22,9 @@ public:
 	int CalculateWin(); // 2 = Win, 1 = Tie, 0 = Lose
 	bool CheckAce(std::list<Card*>* hand) const;
 
+	bool PlayerBust = false;
+	bool DealerBust = false;
+
 private:
 	Deck* currentDeck;
 	std::list<Card*> dealersHand;
@@ -29,5 +32,6 @@ private:
 	bool playersTurn;
 	bool shouldDealerHit;
 	void CheckDealerHit();
+	
 };
 

@@ -119,9 +119,22 @@ std::string GameManager::DealerHit()
 
 int GameManager::CalculateWin()
 {
-	if (GetHandValue(&playersHand) > GetHandValue(&dealersHand)) return 2;
-	else if (GetHandValue(&playersHand) == GetHandValue(&dealersHand)) return 1;
-	else return 0;
+	// Bust conditions
+	if (PlayerBust)
+	{
+		return 0;
+	}
+
+	if (DealerBust)
+	{
+		if (!PlayerBust) return 2;
+	}
+	else
+	{
+		if (GetHandValue(&playersHand) > GetHandValue(&dealersHand)) return 2; // Win
+		else if (GetHandValue(&playersHand) == GetHandValue(&dealersHand)) return 1; // Tie
+		else return 0; // Lose
+	}
 }
 
 bool GameManager::CheckAce(std::list<Card*>* hand) const

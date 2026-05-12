@@ -56,14 +56,12 @@ void Game()
     while (gameManager.IsPlayersTurn())
     {
         cout << gameManager.PlayerDecision(output.PromptDecision()) << endl;
-        gameManager.CheckBust(playerHand);
+        playerHand = gameManager.GetHand(true);
+        gameManager.PlayerBust = gameManager.CheckBust(playerHand);
     }
 
     // If the player has ace(s), ask them what value they want to use
-    output.PromptAce(gameManager.CheckAce(playerHand));
-    
-
-    playerHand = gameManager.GetHand(true);
+    //output.PromptAce(gameManager.CheckAce(playerHand));
 
     // Tell player their final hand and value
     output.PrintPlayerSummary(
@@ -79,9 +77,9 @@ void Game()
     while (gameManager.GetShouldDealerHit())
     {
         cout << gameManager.DealerHit() << endl;
+        dealerHand = gameManager.GetHand(false);
+        gameManager.DealerBust = gameManager.CheckBust(dealerHand);
     }
-
-    dealerHand = gameManager.GetHand(false);
 
     output.PrintDealerSummary(
         gameManager.GetHandString(dealerHand),
